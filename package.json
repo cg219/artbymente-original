@@ -1,0 +1,16 @@
+{
+  "name": "artbymente",
+  "version": "1.0.0",
+  "description": "Art Portfolio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Clemente Gomez",
+  "license": "ISC",
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.23.1",
+    "babel-preset-es2015": "^6.22.0"
+  }
+}
