@@ -11,7 +11,10 @@ const env = process.NODE_ENV || 'development';
 
 const resolvers = {
   getUser: User.get.bind(User),
-  createUser: User.make.bind(User)
+  createUser: User.make.bind(User),
+  createArt: Art.make.bind(Art),
+  updateArt: Art.update.bind(Art),
+  createImage: Image.make.bind(Image)
 }
 
 app.use(bodyParser.json());

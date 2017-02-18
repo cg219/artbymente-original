@@ -1,17 +1,11 @@
 const { buildSchema } = require('graphql');
-const Schema = buildSchema(`
+const CustomType = require('./../types');
+const { makeExecutableSchema } = require('graphql-tools');
+const Schema = `
+  scalar Date
+
   type User {
     username: String
-  }
-
-  type UserError {
-    code: String
-    message: String
-  }
-
-  type UserResponse {
-    user: User
-    error: UserError
   }
 
   input UserInput {
@@ -27,6 +21,7 @@ const Schema = buildSchema(`
     thumbnail: Image
     images: [Image]
     canBuy: Boolean
+    created: Date
   }
 
   input ArtInput {
@@ -35,6 +30,10 @@ const Schema = buildSchema(`
     listingId: String
     slug: String!
     canBuy: Boolean
+    created: Date!
+    thumbnail: String
+    images: [String]
+    updatedSlug: String
   }
 
   type Image {
@@ -46,13 +45,22 @@ const Schema = buildSchema(`
   }
 
   type Mutation {
-    createUser(input: UserInput): UserResponse
+    createUser(input: UserInput): User
+    createArt(input: ArtInput): Art
+    updateArt(input: ArtInput): Art
+    createImage(url: String): Image
   }
 
   schema {
     query: Query
     mutation: Mutation
   }
-`)
+`;
+const resolvers = {
+  Date: CustomType.DateType()
+}
 
-module.exports = Schema;
+module.exports = makeExecutableSchema({
+  typeDefs: Schema,
+  resolvers: resolvers
+});

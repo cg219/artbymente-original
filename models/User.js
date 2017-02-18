@@ -35,29 +35,12 @@ User.statics.make = function createUser(userInput) {
         return this.create(user);
       })
       .then(savedUser => {
-        const response = {
-          user: savedUser,
-          error: null
-        }
-
-        console.log(response);
-        resolve(response);
+        console.log(savedUser);
+        resolve(savedUser);
       })
       .catch(err => {
-        const messages = {
-          11000: 'User Already Exists'
-        }
-        const error = {
-          user: null,
-          error: {
-            code: `${err.code}`,
-            message: `${messages[err.code]}`
-          }
-        }
-
         console.error(err);
-        console.error(error);
-        resolve(error);
+        reject(err);
       })
   })
 }
