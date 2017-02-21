@@ -5,16 +5,18 @@ const config = require('./config');
 const app = require('express')();
 const bodyParser = require('body-parser');
 const gqlHTTP = require('express-graphql');
-const Schema = require('./schemas');
-const {User, Image, Art} = require('./models');
+const Schema = require('./lib/schemas');
+const {User, Image, Art} = require('./lib/models');
 const env = process.NODE_ENV || 'development';
+const Uploader = require('./lib/Uploader');
 
 const resolvers = {
   getUser: User.get.bind(User),
   createUser: User.make.bind(User),
   createArt: Art.make.bind(Art),
   updateArt: Art.update.bind(Art),
-  createImage: Image.make.bind(Image)
+  createImage: Image.make.bind(Image),
+  uploadImage: Uploader.upload
 }
 
 app.use(bodyParser.json());
