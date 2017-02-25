@@ -15,6 +15,7 @@ const resolvers = {
   createUser: User.make.bind(User),
   createArt: Art.make.bind(Art),
   updateArt: Art.update.bind(Art),
+  getAllImages: Image.getAll.bind(Image),
   createImage: Image.make.bind(Image),
   uploadImage: Uploader.upload
 }
